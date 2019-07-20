@@ -19,12 +19,32 @@ const signInWithMail = document.getElementById('signInWithMail');
 const signInWithPhone = document.getElementById('signInWithPhone');
 const signUp = document.getElementById('signUp');
 const failureModal = document.querySelector('.failure');
+const signInWithGoogleButton = document.getElementById('signInWithGoogle');
 
 //Necessary part for the firebase built in functions
 //It's easier and cleaner to type auth.signInWithEmailAndPassword
 //than firebase.auth().signInWithEmailAndPassword
 //also it's less repetitive since we are using it more than once
 const auth = firebase.auth();
+
+signInWithGoogleButton.addEventListener('click', signInWithGoogle);
+
+//Sign in function (email and password authentication)
+const signInWithEmailFunction = () => {
+  const email = mailField.value;
+  const password = passwordField.value;
+
+  //Built in firebase function responsible for authentication
+  auth.signInWithEmailAndPassword(email, password)
+  .then(() => {
+    //Signed in successfully
+    window.location.assign('./profile')
+  })
+  .catch(error => {
+    //Something went wrong
+    console.error(error);
+  })
+}
 
 //Sign in function
 const signInWithEmailFunction = () => {
