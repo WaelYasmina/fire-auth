@@ -20,12 +20,27 @@ const signInWithPhone = document.getElementById('signInWithPhone');
 const signUp = document.getElementById('signUp');
 const failureModal = document.querySelector('.failure');
 const signInWithGoogleButton = document.getElementById('signInWithGoogle');
+const signInWithTwitterButton = document.getElementById('signInWithTwitter');
 
 //Necessary part for the firebase built in functions
 //It's easier and cleaner to type auth.signInWithEmailAndPassword
 //than firebase.auth().signInWithEmailAndPassword
 //also it's less repetitive since we are using it more than once
 const auth = firebase.auth();
+
+const signInWithTwitter = () => {
+  const TwitterProvider = new firebase.auth.TwitterAuthProvider();
+
+  auth.signInWithPopup(TwitterProvider)
+  .then(() => {
+    window.location.assign('./profile');
+  })
+  .catch(error => {
+    console.error(error);
+  })
+}
+
+signInWithTwitterButton.addEventListener('click', signInWithTwitter);
 
 const signInWithGoogle = () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
