@@ -28,8 +28,15 @@ const signInWithTwitterButton = document.getElementById('signInWithTwitter');
 //also it's less repetitive since we are using it more than once
 const auth = firebase.auth();
 
+<<<<<<< HEAD
 const signInWithTwitter = () => {
   const twitterProvider = new firebase.auth.TwitterAuthProvider();
+=======
+signInWithFacebookButton.addEventListener('click', signInWithFacebook);
+
+const signInWithtwitter = () => {
+  const twitterProvider = new firebase.auth.twitterAuthProvider();
+>>>>>>> 0bc8212d536a7d4e34d31557b298c60ef82857c2
 
   auth.signInWithPopup(twitterProvider)
   .then(() => {
