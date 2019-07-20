@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Signup</title>
+      <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+     <link rel="stylesheet" href="./style/signup.css">
+  </head>
+  <body>
+    <main>
+      <section class="container signup-container">
+        <fieldset>
+          <div>
+            <img src="./img/signup.svg">
+            <!--https://www.visualpharm.com/free-icon-->
+           </div>
+          <div>
+            <label for="mail">Email</label> <br>
+           <input type="email" id="mail" name="mail"/>
+         </div>
+          <div>
+           <label for="password">Password</label> <br>
+           <input type="password" id="password" name="password"/> <br>
+          </div>
+          <button id="signUp">Signup</button>
+        </fieldset>
+      </section>
+      <div class="feedbackContainer failure">
+        <div class="feedbackIcon"></div>
+        <p class="feedbackMessage">Signing up failed</p>
+      </div>
+    </main>
+    <script src="./js/signup.js"></script>
+  </body>
+</html>

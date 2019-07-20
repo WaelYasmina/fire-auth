@@ -1,0 +1,89 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat Medium'
+}
+
+main {
+    width: 100vw;
+    height: 900px
+}
+
+.container,
+.feedbackContainer,
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+.container {
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -80%)
+}
+
+button {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    margin: 10px 40px;
+    border: none;
+    background-color: white;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.12);
+    font-size: 1rem;
+    color: #2196f3;
+    cursor: pointer
+}
+
+button:hover {
+    background-color: #f7f7f7;
+    box-shadow: 1px 0px 7px 0px rgba(0,0,0,0.15)
+}
+
+
+#back {
+    width: auto;
+    display: block;
+    float: right;
+    margin: 20px 42px 0px 0px;
+    padding: 10px 20px;
+    border: 1px solid #2196f3;
+    box-shadow: none
+}
+
+#back:hover {
+    background-color: #2196f3;
+    color: white
+}
+
+.feedbackContainer {
+    height: 300px;
+    width: 300px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: rgb(192,192,192,0.1) 1px solid;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.12);
+    display: none 
+}
+
+.feedbackIcon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 20px;
+}
+
+.success .feedbackIcon {
+    background-image: url('../img/success.svg');
+}
+
+.failure .feedbackIcon {
+    background-image: url('../img/failure.svg');
+}

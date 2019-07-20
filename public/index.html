@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Home</title>
+      <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+      <link rel="stylesheet" href="./style/home.css">
+  </head>
+  <body>
+    <main>
+      <div class="wrapper">
+        <section class="container mail-container">
+            <fieldset>
+              <div>
+                  <img src="./img/mail.svg" alt="signin with mail & password">
+              </div>
+            <div>
+              <label for="mail">Email</label> <br>
+              <input type="email" id="mail" name="mail"/>
+            </div>
+            <div>
+              <label for="password">Password</label> <br>
+              <input type="password" id="password" name="password"/>
+            </div>
+            <a href="./reset">I forgot my password</a>
+            <div class="clearfix"></div>
+            <button id="signInWithMail">Login</button>
+            <button id="signUp">Signup</button>
+          </fieldset>    
+      </section>
+      <section class="socialMedia-container"> 
+        <button id="signInWithGoogle">Login with your Google
+          <img src="./img/google.svg" width="55px" height="55px" alt="Sign in with your Google account.">
+        </button><br>
+        <button id="signInWithTwitter">Login with your Twitter
+          <img src="./img/twitter.svg" width="55px" height="55px" alt="Sign in with your Twitter account.">
+        </button><br>
+        <button id="signInWithFacebook">Login with your Facebook
+          <img src="./img/facebook.svg" width="55px" height="55px" alt="Sign in with your Facebook account.">
+        </button>
+      </section>
+      <section class="container phone-container">
+        <fieldset>
+          <div>
+                <img src="./img/phone.svg" alt="signin with your phone number">
+            </div>
+          <div>
+            <label for="phoneNumber">Phone Number</label> <br>
+            <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]"/> <br>
+          </div>
+          <div>
+            <label for="code">Code</label> <br>
+            <input type="text" id="code" name="code"/> <br>
+          </div>
+          <div id="recaptcha-container"></div>
+          <button id="signInWithPhone">Login</button>
+          <button id="getCode">Get Code</button>  
+        </fieldset>
+      </section>
+      </div>
+      <nav>
+        <input type="radio" id="method1" name="method" value="method1" checked>Sign in with your email &#38; password <br>
+        <input type="radio" id="method2" name="method" value="method2">Sign in with your social media account <br>
+        <input type="radio" id="method3" name="method" value="method3">Sign in with your phone number
+      </nav>
+      <div class="feedbackContainer success">
+        <div class="feedbackIcon"></div>
+        <p class="feedbackMessage">Signed up Successfully</p>
+      </div>
+      <div class="feedbackContainer failure">
+        <div class="feedbackIcon"></div>
+        <p class="feedbackMessage">Signing up failed</p>
+      </div>
+    </main>
+    <script src="./js/home.js"></script>
+  </body>
+</html>
