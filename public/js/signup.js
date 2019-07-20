@@ -5,7 +5,56 @@ const photoField = document.getElementById('photo');
 const labels = document.getElementsByTagName('label');
 const signUp = document.getElementById('signUp');
 const failureModal = document.querySelector('.failure');
- 
+
+const auth = firebase.auth();
+//auth.languageCode = 'fr_FR'; //Sending verification emails only in french
+
+//Sends verification emails in the same language as the language used in the
+//user's device
+auth.useDeviceLanguage();
+
+//Function wrapping all the signup parts including the email verification email
+//triggered once the user clicks on the signup button
+const signUpFunction = () => {
+    const email = mailField.value;
+    const password = passwordField.value;
+
+    //Built in firebase function responsible for signing up a user
+    auth.createUserWithEmailAndPassword(email, password)
+    .then(() => {
+        console.log('Signed Up Successfully !');
+        sendVerificationEmail();
+    })
+    .catch(error => {
+        console.error(error);
+        //Shows a modal as feedback if there's an error
+        failureModal.style.display = 'flex';
+        setTimeout(()=>{
+            failureModal.style.display = 'none';
+        }, 1000);
+    })
+}
+
+//Function called right after the signUpWithEmailAndPassword to send verification emails
+const sendVerificationEmail = () => {
+    //Built in firebase function responsible for sending the verification email
+    auth.currentUser.sendEmailVerification()
+    .then(() => {
+        console.log('Verification Email Sent Successfully !');
+        //redirecting the user to the profile page once everything is done correctly
+        window.location.assign('../profile');
+    })
+    .catch(error => {
+        console.error(error);
+    })
+}
+
+signUp.addEventListener('click', signUpFunction);
+
+document.getElementById('userInfo').addEventListener('click', () => {
+    console.log(auth.currentUser)
+})
+
 //Animations
 mailField.addEventListener('focus', () => {
     labels.item(0).className = "focused-field";
@@ -23,22 +72,4 @@ mailField.addEventListener('blur', () => {
 passwordField.addEventListener('blur', () => {
     if(!passwordField.value)
         labels.item(1).className = "unfocused-field";
-});
-
-displayNameField.addEventListener('focus', () => {
-    labels.item(2).className = "focused-field";
-});
-
-photoField.addEventListener('focus', () => {
-    labels.item(3).className = "focused-field";
-});
-
-displayNameField.addEventListener('blur', () => {
-    if(!displayNameField.value)
-        labels.item(2).className = "unfocused-field";
-});
-
-photoField.addEventListener('blur', () => {
-    if(!photoField.value)
-        labels.item(3).className = "unfocused-field";
 });

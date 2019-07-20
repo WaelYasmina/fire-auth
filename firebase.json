@@ -5,6 +5,16 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "source": "/signup",
+        "destination": "./signup.html"
+      },
+      {
+        "source": "/profile",
+        "destination": "./profile.html"
+      }
     ]
   }
 }
