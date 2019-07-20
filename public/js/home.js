@@ -27,24 +27,19 @@ const signInWithGoogleButton = document.getElementById('signInWithGoogle');
 //also it's less repetitive since we are using it more than once
 const auth = firebase.auth();
 
-signInWithGoogleButton.addEventListener('click', signInWithGoogle);
+const signInWithGoogle = () => {
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-//Sign in function (email and password authentication)
-const signInWithEmailFunction = () => {
-  const email = mailField.value;
-  const password = passwordField.value;
-
-  //Built in firebase function responsible for authentication
-  auth.signInWithEmailAndPassword(email, password)
+  auth.signInWithPopup(googleProvider)
   .then(() => {
-    //Signed in successfully
-    window.location.assign('./profile')
+    window.location.assign('./profile');
   })
   .catch(error => {
-    //Something went wrong
     console.error(error);
   })
 }
+
+signInWithGoogleButton.addEventListener('click', signInWithGoogle);
 
 //Sign in function
 const signInWithEmailFunction = () => {
