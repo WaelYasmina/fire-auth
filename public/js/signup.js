@@ -27,11 +27,6 @@ const signUpFunction = () => {
     })
     .catch(error => {
         console.error(error);
-        //Shows a modal as feedback if there's an error
-        failureModal.style.display = 'flex';
-        setTimeout(()=>{
-            failureModal.style.display = 'none';
-        }, 1000);
     })
 }
 
@@ -50,10 +45,6 @@ const sendVerificationEmail = () => {
 }
 
 signUp.addEventListener('click', signUpFunction);
-
-document.getElementById('userInfo').addEventListener('click', () => {
-    console.log(auth.currentUser)
-})
 
 //Animations
 mailField.addEventListener('focus', () => {
