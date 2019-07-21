@@ -9,16 +9,21 @@ const deleteButton = document.getElementById('delete');
 const auth = firebase.auth();
 
 const editInformation = () => {
+    //Holdes all of the information about the current signed in user
     const user = auth.currentUser;
     setDisplayName(user);
     setPhotoUrl(user);
 
+    //Creates creadential to re-sign in to update crtitical information
+    //such as changing password or the user's email
+    //not necessary for changing photoURL or displayName
     const password = prompt('password');
     const credential = firebase.auth.EmailAuthProvider.credential(
         auth.currentUser.email,
         password
     );
 
+    //Reauthenticating to update the password and email
     user.reauthenticateWithCredential(credential)
     .then( ()=> {
         setPassword(user);
@@ -63,17 +68,12 @@ const setEmail = user => {
     if(newEmail)
         user.updateEmail(newEmail)
         .then(() => {
-            window.location.assign('../profile');
+            windowsd.location.assign('../profile');
         })
         .catch(error => {
             console.error(error);
         })
 }
-
-
-
-
-
 
 
 const setPassword = user => {
@@ -87,10 +87,6 @@ const setPassword = user => {
             console.error(error);
         })
 }
-
-
-
-
 
 const setDisplayName = user => {
     const displayName = displayNameField.value;
@@ -122,7 +118,7 @@ const setPhotoUrl = user => {
 
 editButton.addEventListener('click', editInformation);
 
-
+//Animations
 mailField.addEventListener('focus', () => {
     labels.item(0).className = "focused-field";
 });
