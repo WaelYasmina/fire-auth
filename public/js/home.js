@@ -46,23 +46,6 @@ const signInWithEmailFunction = () => {
   })
 }
 
-//Sign in function
-const signInWithEmailFunction = () => {
-  const email = mailField.value;
-  const password = passwordField.value;
-
-  //Built in firebase function responsible for authentication
-  auth.signInWithEmailAndPassword(email, password)
-  .then(() => {
-    //Signed in successfully
-    window.location.assign('./profile')
-  })
-  .catch(error => {
-    //Something went wrong
-    console.error(error);
-  })
-}
-
 //Adds the click event to the signInWithMail button
 //so it calls the signInWithEmail function whenever a user clicks on it
 signInWithMail.addEventListener('click', signInWithEmailFunction);
