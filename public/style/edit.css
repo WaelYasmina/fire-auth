@@ -46,15 +46,37 @@ input[type = "url"] {
     font-size: 1rem
 }
 
-input[type = "submit"], button {
+button:first-of-type, button {
     float: right;
-    margin: 20px 47px 0px 0px;
+    margin: 20px 42px 0px 0px;
     padding: 10px 20px;
-    border: 1px solid #2196f3;
+}
+
+button {  
     float: right;
     background-color: #2196f3;
     color: white;
+    border: 1px solid #2196f3
+}
+
+button:last-of-type {
+    background-color: white;
+    color: red;
+    border: red 1px solid
+}
+
+.clear {
+    clear: both
+}
+
+button:last-of-type:hover {
+    background-color: red;
+    color: white;
     cursor: pointer
+}
+
+button {
+    margin-right: 5px
 }
 
 .container div {
