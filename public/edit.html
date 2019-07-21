@@ -32,7 +32,8 @@
             <label for="photo">Url of picture</label> <br>
             <input type="url" id="photo"/> <br>
           </div>
-          <button id="edit">Confirm</button>   
+          <button id="edit">Confirm</button>
+          <button id="delete">Delete Account</button>    
         </fieldset>
       </section>
       <div class="feedbackContainer success">
@@ -43,7 +44,16 @@
         <div class="feedbackIcon"></div>
         <p class="feedbackMessage">Signing up failed</p>
       </div>
-    </main> 
-    <script src="./js/edit.js"></script>   
+    </main>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/6.2.4/firebase-app.js"></script>
+    <script src="/__/firebase/6.2.4/firebase-auth.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#reserved-urls -->
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <script src="./js/edit.js"></script>
   </body>
 </html>

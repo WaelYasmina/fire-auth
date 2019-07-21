@@ -19,14 +19,16 @@ logOut.addEventListener('click', () => {
 
 auth.onAuthStateChanged(user => {
     console.log(user);
+    displayNameHolder.innerText = user.displayName;
+    photoHolder.setAttribute('src', user.photoURL);
 })
 
 //Go to modification page
 modifyAccount.addEventListener('click', () => {
-    window.location.assign('./edit');
+    window.location.assign('../edit');
 });
 
 //Go to merge accounts page
 mergeAccounts.addEventListener('click', () => {
-    window.location.assign('./merge');
+    window.location.assign('../merge');
 });

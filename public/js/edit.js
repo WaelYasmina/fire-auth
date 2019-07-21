@@ -3,6 +3,125 @@ const passwordField = document.getElementById('password');
 const displayNameField = document.getElementById('displayName');
 const photoField = document.getElementById('photo');
 const labels = document.getElementsByTagName('label');
+const editButton = document.getElementById('edit');
+const deleteButton = document.getElementById('delete');
+
+const auth = firebase.auth();
+
+const editInformation = () => {
+    const user = auth.currentUser;
+    setDisplayName(user);
+    setPhotoUrl(user);
+
+    const password = prompt('password');
+    const credential = firebase.auth.EmailAuthProvider.credential(
+        auth.currentUser.email,
+        password
+    );
+
+    user.reauthenticateWithCredential(credential)
+    .then( ()=> {
+        setPassword(user);
+        setEmail(user);
+    })
+    .catch(error => {
+        console.error(error);
+    })
+}
+
+const deleteAccount = () => {
+    const user = auth.currentUser;
+    const password = prompt('password');
+    const credential = firebase.auth.EmailAuthProvider.credential(
+        auth.currentUser.email,
+        password
+    );
+
+    user.reauthenticateWithCredential(credential)
+    .then( ()=> {
+        deleteAccountFunction(user);
+    })
+    .catch(error => {
+        console.error(error);
+    })
+}
+
+const deleteAccountFunction = user => {
+    user.delete()
+    .then(() => {
+        window.location.assign('../');
+    })
+    .catch(error => {
+        console.error(error);
+    })
+}
+
+deleteButton.addEventListener('click', deleteAccount);
+
+const setEmail = user => {
+    const newEmail = mailField.value;
+    if(newEmail)
+        user.updateEmail(newEmail)
+        .then(() => {
+            window.location.assign('../profile');
+        })
+        .catch(error => {
+            console.error(error);
+        })
+}
+
+
+
+
+
+
+
+const setPassword = user => {
+    const newPassword = passwordField.value;
+    if(newPassword)
+        user.updatePassword(newPassword)
+        .then(() => {
+            window.location.assign('../profile');
+        })
+        .catch(error => {
+            console.error(error);
+        })
+}
+
+
+
+
+
+const setDisplayName = user => {
+    const displayName = displayNameField.value;
+    if(displayName)
+        user.updateProfile({
+            displayName: displayName
+        })
+        .then(() => {
+            window.location.assign('../profile');
+        })
+        .catch(error => {
+            console.error(error);
+        })
+}
+
+const setPhotoUrl = user => {
+    const photo = photoField.value;
+    if(photo)
+        user.updateProfile({
+            photoURL: photo
+        })
+        .then(() => {
+            window.location.assign('../profile');
+        })
+        .catch(error => {
+            console.error(error);
+        })
+}
+
+editButton.addEventListener('click', editInformation);
+
 
 mailField.addEventListener('focus', () => {
     labels.item(0).className = "focused-field";
