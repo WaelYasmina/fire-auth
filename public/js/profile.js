@@ -17,6 +17,10 @@ logOut.addEventListener('click', () => {
     })
 })
 
+auth.onAuthStateChanged(user => {
+    console.log(user);
+})
+
 //Go to modification page
 modifyAccount.addEventListener('click', () => {
     window.location.assign('./edit');
