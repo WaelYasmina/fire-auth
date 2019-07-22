@@ -14,14 +14,11 @@
       {
         "source": "/profile",
         "destination": "./profile.html"
-      },
+      }
+      ,
       {
         "source": "/edit",
         "destination": "./edit.html"
-      },
-      {
-        "source": "/reset",
-        "destination": "./reset.html"
       }
     ]
   }

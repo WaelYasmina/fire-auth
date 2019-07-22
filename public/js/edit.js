@@ -9,25 +9,91 @@ const deleteButton = document.getElementById('delete');
 const auth = firebase.auth();
 
 const editInformation = () => {
-    //Holdes all of the information about the current signed in user
+    const newNameAndPhoto = {
+        newDisplayName: displayNameField.value,
+        newPhotoUrl: photoField.value,
+    };
+    const newEmail = mailField.value;
+    const newPassword = passwordField.value;
     const user = auth.currentUser;
-    setDisplayName(user);
-    setPhotoUrl(user);
 
-    //Creates creadential to re-sign in to update crtitical information
-    //such as changing password or the user's email
-    //not necessary for changing photoURL or displayName
-    const password = prompt('password');
+    changeNameAndPhoto(user, newNameAndPhoto);
+
+    if(newEmail && newPassword) {
+        const credential = createCredential(user);
+        changePassword(user, credential, newPassword);
+        changeEmail(user, credential, newEmail);
+    }
+    else if(newEmail) {
+        const credential = createCredential(user);
+        changeEmail(user, credential, newEmail);
+    }
+    else if(newPassword) {
+        const credential = createCredential(user);
+        changePassword(user, credential, newPassword);
+    }
+}
+
+const changeNameAndPhoto = (user, newNameAndPhoto) => {
+    const {newDisplayName, newPhotoUrl} = newNameAndPhoto;
+    if(newDisplayName && newPhotoUrl)
+        user.updateProfile({
+            displayName: newDisplayName,
+            photoURL: newPhotoUrl
+        })
+        .then(() => {
+            window.location.assign('../profile');
+        })
+        .catch(error => {
+            console.error(error);
+        })
+    else if(newDisplayName)
+        user.updateProfile({
+            displayName: newDisplayName
+        })
+        .then(() => {
+            window.location.assign('../profile');
+        })
+        .catch(error => {
+            console.error(error);
+        })
+    else if(newPhotoUrl)
+        user.updateProfile({
+            photoURL: newPhotoUrl
+        })
+        .then(() => {
+            window.location.assign('../profile');
+        })
+        .catch(error => {
+            console.error(error);
+        })
+}
+
+const createCredential = user => {
+    const password = prompt('Password:');
     const credential = firebase.auth.EmailAuthProvider.credential(
-        auth.currentUser.email,
+        user.email,
         password
     );
+    return credential;
+}
 
-    //Reauthenticating to update the password and email
+const changePassword = (user, credential, newPassword) => {
     user.reauthenticateWithCredential(credential)
-    .then( ()=> {
-        setPassword(user);
-        setEmail(user);
+    .then(() => {
+        user.updatePassword(newPassword);
+        console.log('Password has been updated !');
+    })
+    .catch(error => {
+        console.error(error);
+    })
+}
+
+const changeEmail = (user, credential, newEmail) => {
+    user.reauthenticateWithCredential(credential)
+    .then(() => {
+        user.updateEmail(newEmail);
+        console.log('Email has been updated !');
     })
     .catch(error => {
         console.error(error);
@@ -36,25 +102,11 @@ const editInformation = () => {
 
 const deleteAccount = () => {
     const user = auth.currentUser;
-    const password = prompt('password');
-    const credential = firebase.auth.EmailAuthProvider.credential(
-        auth.currentUser.email,
-        password
-    );
-
+    const credential = createCredential(user);
     user.reauthenticateWithCredential(credential)
-    .then( ()=> {
-        deleteAccountFunction(user);
-    })
-    .catch(error => {
-        console.error(error);
-    })
-}
-
-const deleteAccountFunction = user => {
-    user.delete()
     .then(() => {
-        window.location.assign('../');
+        user.delete();
+        console.log('Account Deleted !');
     })
     .catch(error => {
         console.error(error);
@@ -62,59 +114,6 @@ const deleteAccountFunction = user => {
 }
 
 deleteButton.addEventListener('click', deleteAccount);
-
-const setEmail = user => {
-    const newEmail = mailField.value;
-    if(newEmail)
-        user.updateEmail(newEmail)
-        .then(() => {
-            windowsd.location.assign('../profile');
-        })
-        .catch(error => {
-            console.error(error);
-        })
-}
-
-
-const setPassword = user => {
-    const newPassword = passwordField.value;
-    if(newPassword)
-        user.updatePassword(newPassword)
-        .then(() => {
-            window.location.assign('../profile');
-        })
-        .catch(error => {
-            console.error(error);
-        })
-}
-
-const setDisplayName = user => {
-    const displayName = displayNameField.value;
-    if(displayName)
-        user.updateProfile({
-            displayName: displayName
-        })
-        .then(() => {
-            window.location.assign('../profile');
-        })
-        .catch(error => {
-            console.error(error);
-        })
-}
-
-const setPhotoUrl = user => {
-    const photo = photoField.value;
-    if(photo)
-        user.updateProfile({
-            photoURL: photo
-        })
-        .then(() => {
-            window.location.assign('../profile');
-        })
-        .catch(error => {
-            console.error(error);
-        })
-}
 
 editButton.addEventListener('click', editInformation);
 
