@@ -3,6 +3,8 @@ const passwordField = document.getElementById('password');
 const displayNameField = document.getElementById('displayName');
 const photoField = document.getElementById('photo');
 const labels = document.getElementsByTagName('label');
+const editButton = document.getElementById('edit');
+const deleteButton = document.getElementById('delete');
 
 mailField.addEventListener('focus', () => {
     labels.item(0).className = "focused-field";
