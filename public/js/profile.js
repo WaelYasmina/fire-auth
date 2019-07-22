@@ -19,6 +19,7 @@ logOut.addEventListener('click', () => {
 
 auth.onAuthStateChanged(user => {
     console.log(user);
+    //Display the current signed in user on the page
     displayNameHolder.innerText = user.displayName;
     photoHolder.setAttribute('src', user.photoURL);
 })

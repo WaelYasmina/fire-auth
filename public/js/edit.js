@@ -15,19 +15,23 @@ const editInformation = () => {
     };
     const newEmail = mailField.value;
     const newPassword = passwordField.value;
+    //Holds all the information about the current signed in user
     const user = auth.currentUser;
 
     changeNameAndPhoto(user, newNameAndPhoto);
 
+    //Changes the email and password if the respective fields are filled with values
     if(newEmail && newPassword) {
         const credential = createCredential(user);
         changePassword(user, credential, newPassword);
         changeEmail(user, credential, newEmail);
     }
+    //Changes only the email
     else if(newEmail) {
         const credential = createCredential(user);
         changeEmail(user, credential, newEmail);
     }
+    //Changes only password
     else if(newPassword) {
         const credential = createCredential(user);
         changePassword(user, credential, newPassword);
@@ -36,6 +40,7 @@ const editInformation = () => {
 
 const changeNameAndPhoto = (user, newNameAndPhoto) => {
     const {newDisplayName, newPhotoUrl} = newNameAndPhoto;
+    //Changes displayName and photoURL properties
     if(newDisplayName && newPhotoUrl)
         user.updateProfile({
             displayName: newDisplayName,
@@ -47,6 +52,7 @@ const changeNameAndPhoto = (user, newNameAndPhoto) => {
         .catch(error => {
             console.error(error);
         })
+    //Changes only displaName
     else if(newDisplayName)
         user.updateProfile({
             displayName: newDisplayName
@@ -57,6 +63,7 @@ const changeNameAndPhoto = (user, newNameAndPhoto) => {
         .catch(error => {
             console.error(error);
         })
+    //Changes only photoURL
     else if(newPhotoUrl)
         user.updateProfile({
             photoURL: newPhotoUrl
@@ -69,6 +76,9 @@ const changeNameAndPhoto = (user, newNameAndPhoto) => {
         })
 }
 
+//Create credential for the reauthenticationWithCredential function which is a most do
+//in order to change critical information such as changing email, password or
+//deleting the account
 const createCredential = user => {
     const password = prompt('Password:');
     const credential = firebase.auth.EmailAuthProvider.credential(
