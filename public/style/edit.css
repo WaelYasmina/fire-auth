@@ -52,17 +52,23 @@ button:first-of-type, button {
     padding: 10px 20px;
 }
 
-button {  
+button, button + button:hover {  
     float: right;
     background-color: #2196f3;
     color: white;
-    border: 1px solid #2196f3
+    border: 1px solid #2196f3;
+    cursor: pointer
 }
 
 button:last-of-type {
     background-color: white;
     color: red;
     border: red 1px solid
+}
+
+button + button {
+    background-color: white;
+    color: #2196f3;
 }
 
 .clear {
@@ -72,7 +78,7 @@ button:last-of-type {
 button:last-of-type:hover {
     background-color: red;
     color: white;
-    cursor: pointer
+    border: 1px red solid;
 }
 
 button {

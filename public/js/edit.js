@@ -3,51 +3,55 @@ const passwordField = document.getElementById('password');
 const displayNameField = document.getElementById('displayName');
 const photoField = document.getElementById('photo');
 const labels = document.getElementsByTagName('label');
+const backButton = document.getElementById('back');
 const editButton = document.getElementById('edit');
 const deleteButton = document.getElementById('delete');
 
 const auth = firebase.auth();
 
+auth.onAuthStateChanged(user => {
+    console.log(user);
+})
+
 const editInformation = () => {
     const newNameAndPhoto = {
         newDisplayName: displayNameField.value,
-        newPhotoUrl: photoField.value,
+        newPhotoURL: photoField.value
     };
     const newEmail = mailField.value;
     const newPassword = passwordField.value;
     //Holds all the information about the current signed in user
     const user = auth.currentUser;
 
-    changeNameAndPhoto(user, newNameAndPhoto);
-
     //Changes the email and password if the respective fields are filled with values
-    if(newEmail && newPassword) {
+    if(newPassword && newEmail) {
         const credential = createCredential(user);
         changePassword(user, credential, newPassword);
         changeEmail(user, credential, newEmail);
     }
     //Changes only the email
-    else if(newEmail) {
-        const credential = createCredential(user);
-        changeEmail(user, credential, newEmail);
-    }
-    //Changes only password
     else if(newPassword) {
         const credential = createCredential(user);
         changePassword(user, credential, newPassword);
     }
+    //Changes only password
+    else if(newEmail) {
+        const credential = createCredential(user);
+        changeEmail(user, credential, newEmail);
+    }
+    
 }
 
 const changeNameAndPhoto = (user, newNameAndPhoto) => {
-    const {newDisplayName, newPhotoUrl} = newNameAndPhoto;
+    const {newDisplayName, newPhotoURL} = newNameAndPhoto;
     //Changes displayName and photoURL properties
-    if(newDisplayName && newPhotoUrl)
+    if(newDisplayName && newPhotoURL)
         user.updateProfile({
             displayName: newDisplayName,
-            photoURL: newPhotoUrl
+            photoURL: newPhotoURL
         })
         .then(() => {
-            window.location.assign('../profile');
+            console.log('Profile Updated Successfully !');
         })
         .catch(error => {
             console.error(error);
@@ -58,18 +62,18 @@ const changeNameAndPhoto = (user, newNameAndPhoto) => {
             displayName: newDisplayName
         })
         .then(() => {
-            window.location.assign('../profile');
+            console.log('Display Name Updated Successfully !');
         })
         .catch(error => {
             console.error(error);
         })
     //Changes only photoURL
-    else if(newPhotoUrl)
+    else if(newPhotoURL)
         user.updateProfile({
-            photoURL: newPhotoUrl
+            photoURL: newPhotoURL
         })
         .then(() => {
-            window.location.assign('../profile');
+            console.log('PhotoURL Updated Successfully !');
         })
         .catch(error => {
             console.error(error);
@@ -92,7 +96,7 @@ const changePassword = (user, credential, newPassword) => {
     user.reauthenticateWithCredential(credential)
     .then(() => {
         user.updatePassword(newPassword);
-        console.log('Password has been updated !');
+        console.log('Password Updated!');
     })
     .catch(error => {
         console.error(error);
@@ -103,12 +107,13 @@ const changeEmail = (user, credential, newEmail) => {
     user.reauthenticateWithCredential(credential)
     .then(() => {
         user.updateEmail(newEmail);
-        console.log('Email has been updated !');
+        console.log('Email Updated!');
     })
     .catch(error => {
         console.error(error);
     })
 }
+
 
 const deleteAccount = () => {
     const user = auth.currentUser;
@@ -116,7 +121,7 @@ const deleteAccount = () => {
     user.reauthenticateWithCredential(credential)
     .then(() => {
         user.delete();
-        console.log('Account Deleted !');
+        console.log('Your Account Has Been Deleted!');
     })
     .catch(error => {
         console.error(error);
@@ -126,6 +131,10 @@ const deleteAccount = () => {
 deleteButton.addEventListener('click', deleteAccount);
 
 editButton.addEventListener('click', editInformation);
+
+backButton.addEventListener('click', () => {
+    window.location.assign('../profile');
+});
 
 //Animations
 mailField.addEventListener('focus', () => {
