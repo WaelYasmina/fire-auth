@@ -22,6 +22,7 @@ const editInformation = () => {
     const newPassword = passwordField.value;
     //Holds all the information about the current signed in user
     const user = auth.currentUser;
+    changeNameAndPhoto(user, newNameAndPhoto);
 
     //Changes the email and password if the respective fields are filled with values
     if(newPassword && newEmail) {
