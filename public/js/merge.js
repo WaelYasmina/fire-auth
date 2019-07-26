@@ -19,7 +19,7 @@ const mergeAndUnmergeWithTwitter = () => {
     if(user) {
         //provider index will check if the current account is linked with a provider (twitter.com)
         //in this case. If the providerId exists then the checkIfLinked will return the index
-        //of the providerId for the unlink function to work it also helps to know which function
+        //of the providerId for the unlink function to work. It also helps to know which function
         //should be triggered (merge or unmerge).
         const providerIndex = checkIfLinked(user, 'twitter.com');
         if(providerIndex != -1)
