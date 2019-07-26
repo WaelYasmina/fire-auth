@@ -12,7 +12,15 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 const mergeAndUnmergeWithTwitter = () => {
     const user = auth.currentUser;
+    //user takes a bit of time to get the auth.current user value
+    //which means if the user clicks sooner at the button the functions using that constant
+    //might generates problems, so we need to make sure it's filled before running any
+    //treatment thus using it in any if statement.
     if(user) {
+        //provider index will check if the current account is linked with a provider (twitter.com)
+        //in this case. If the providerId exists then the checkIfLinked will return the index
+        //of the providerId for the unlink function to work it also helps to know which function
+        //should be triggered (merge or unmerge).
         const providerIndex = checkIfLinked(user, 'twitter.com');
         if(providerIndex != -1)
             unmerge(user, providerIndex);
@@ -20,7 +28,6 @@ const mergeAndUnmergeWithTwitter = () => {
             merge(user, twitterProvider);
     }
 }
-
 
 const mergeAndUnmergeWithGoogle = () => {
     const user = auth.currentUser;
@@ -32,8 +39,6 @@ const mergeAndUnmergeWithGoogle = () => {
             merge(user, googleProvider);
     }
 }
-
-
 
 const merge = (previousUser, provider) => {
     auth.signInWithPopup(provider)
@@ -50,7 +55,6 @@ const merge = (previousUser, provider) => {
     })
 }
 
-
 const unmerge = (user, providerIndex) => {
     user.unlink(user.providerData[providerIndex].providerId)
     .then(() => {
@@ -61,7 +65,6 @@ const unmerge = (user, providerIndex) => {
     })
 }
 
-
 const checkIfLinked = (user, providerId) => {
     const userProviders = user.providerData;
     let providerIndex = -1;
@@ -71,8 +74,6 @@ const checkIfLinked = (user, providerId) => {
     }
     return providerIndex;
 }
-
-
 
 mergeWithTwitterButton.addEventListener('click', mergeAndUnmergeWithTwitter);
 
