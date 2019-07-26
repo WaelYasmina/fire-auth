@@ -26,8 +26,8 @@ main {
 }
 
 button {
-    width: 400px;
-    display: flex;
+    width: 500px;
+    /* display: flex; */
     align-items: center;
     justify-content: space-around;
     padding: 10px;
@@ -40,11 +40,24 @@ button {
     cursor: pointer
 }
 
+button img {
+    float: right;
+    margin-right: 6%
+}
+
+button span {
+    display: inline-block;
+    transform: translateY(50%)
+}
+
 button:hover {
     background-color: #f7f7f7;
     box-shadow: 1px 0px 7px 0px rgba(0,0,0,0.15)
 }
 
+.clearfix {
+    clear: both;
+}
 
 #back {
     width: auto;

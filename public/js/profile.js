@@ -20,8 +20,10 @@ logOut.addEventListener('click', () => {
 auth.onAuthStateChanged(user => {
     console.log(user);
     //display the displayName and photoURL of the user on the page
-    displayNameHolder.innerText = user.displayName;
-    photoHolder.setAttribute('src', user.photoURL);
+    if(user.displayName)
+        displayNameHolder.innerText = user.displayName;
+    if(user.photoURL)
+        photoHolder.setAttribute('src', user.photoURL);
 })
 
 //Go to modification page
