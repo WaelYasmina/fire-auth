@@ -5,6 +5,7 @@ const photoField = document.getElementById('photo');
 const labels = document.getElementsByTagName('label');
 const signUp = document.getElementById('signUp');
 const failureModal = document.querySelector('.failure');
+const feedbackMessage = document.querySelector('.feedbackMessage');
 
 const auth = firebase.auth();
 //auth.languageCode = 'fr_FR'; //Sending verification emails only in french
