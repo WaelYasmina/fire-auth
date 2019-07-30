@@ -9,28 +9,23 @@
     "redirects": [
       {
         "source": "/signup",
-        "destination": "./signup.html",
-        "type": 301
+        "destination": "./signup.html"
       },
       {
         "source": "/profile",
-        "destination": "./profile.html",
-        "type": 301
+        "destination": "./profile.html"
       },
       {
         "source": "/edit",
-        "destination": "./edit.html",
-        "type": 301
+        "destination": "./edit.html"
       },
       {
         "source": "/reset",
-        "destination": "./reset.html",
-        "type": 301
+        "destination": "./reset.html"
       },
       {
         "source": "/merge",
-        "destination": "./merge.html",
-        "type": 301
+        "destination": "./merge.html"
       }
     ]
   }
