@@ -6,6 +6,7 @@ const labels = document.getElementsByTagName('label');
 const signUp = document.getElementById('signUp');
 const failureModal = document.querySelector('.failure');
 const feedbackMessage = document.querySelector('.feedbackMessage');
+let state = 0;
 
 const auth = firebase.auth();
 //auth.languageCode = 'fr_FR'; //Sending verification emails only in french
@@ -24,10 +25,12 @@ const signUpFunction = () => {
     auth.createUserWithEmailAndPassword(email, password)
     .then(() => {
         console.log('Signed Up Successfully !');
+        state = 1;
         sendVerificationEmail();
     })
     .catch(error => {
-        console.error(error);
+        //console.error(error);
+        showErrorModal(error.message);
     })
 }
 
@@ -46,6 +49,19 @@ const sendVerificationEmail = () => {
 }
 
 signUp.addEventListener('click', signUpFunction);
+
+auth.onAuthStateChanged(user => {
+    if(user && (state === 0))
+        window.location.assign('../profile');
+})
+
+const showErrorModal = errorMessage => {
+    failureModal.style.display = 'flex';
+    feedbackMessage.innerText = errorMessage;
+    setTimeout(() => {
+        failureModal.style.display = 'none';
+    }, 1300)
+}
 
 //Animations
 mailField.addEventListener('focus', () => {

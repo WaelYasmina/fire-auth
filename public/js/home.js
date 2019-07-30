@@ -130,6 +130,11 @@ signUp.addEventListener('click', () => {
   window.location.assign('./signup');
 });
 
+auth.onAuthStateChanged(user => {
+  if(user)
+    window.location.assign('./profile');
+})
+
 //Animations
 const initializeInputAnimationState = (fieldName, labelNumber) => {
   if(fieldName.value)
