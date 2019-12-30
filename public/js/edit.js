@@ -9,9 +9,10 @@ const deleteButton = document.getElementById('delete');
 
 const auth = firebase.auth();
 
+// Just to print your current user information so you can the changes once done
 auth.onAuthStateChanged(user => {
     console.log(user);
-})
+});
 
 const editInformation = () => {
     const newNameAndPhoto = {
@@ -20,22 +21,22 @@ const editInformation = () => {
     };
     const newEmail = mailField.value;
     const newPassword = passwordField.value;
-    //Holds all the information about the current signed in user
+    // Holds all the information about the current signed in user
     const user = auth.currentUser;
     changeNameAndPhoto(user, newNameAndPhoto);
 
-    //Changes the email and password if the respective fields are filled with values
+    // Changes the email and password if the respective fields are filled with values
     if(newPassword && newEmail) {
         const credential = createCredential(user);
         changePassword(user, credential, newPassword);
         changeEmail(user, credential, newEmail);
     }
-    //Changes only the email
+    // Changes only the email
     else if(newPassword) {
         const credential = createCredential(user);
         changePassword(user, credential, newPassword);
     }
-    //Changes only password
+    // Changes only password
     else if(newEmail) {
         const credential = createCredential(user);
         changeEmail(user, credential, newEmail);
@@ -45,7 +46,7 @@ const editInformation = () => {
 
 const changeNameAndPhoto = (user, newNameAndPhoto) => {
     const {newDisplayName, newPhotoURL} = newNameAndPhoto;
-    //Changes displayName and photoURL properties
+    // Changes displayName and photoURL properties
     if(newDisplayName && newPhotoURL)
         user.updateProfile({
             displayName: newDisplayName,
@@ -57,7 +58,7 @@ const changeNameAndPhoto = (user, newNameAndPhoto) => {
         .catch(error => {
             console.error(error);
         })
-    //Changes only displaName
+    // Changes the displayName only
     else if(newDisplayName)
         user.updateProfile({
             displayName: newDisplayName
@@ -68,7 +69,7 @@ const changeNameAndPhoto = (user, newNameAndPhoto) => {
         .catch(error => {
             console.error(error);
         })
-    //Changes only photoURL
+    //Changes photoURL only
     else if(newPhotoURL)
         user.updateProfile({
             photoURL: newPhotoURL
@@ -81,9 +82,9 @@ const changeNameAndPhoto = (user, newNameAndPhoto) => {
         })
 }
 
-//Create credential for the reauthenticationWithCredential function which is a most do
-//in order to change critical information such as changing email, password or
-//deleting the account
+// Creates credential for the reauthenticationWithCredential function which is a most do
+// in order to change critical information such as changing email, password or
+// deleting the account
 const createCredential = user => {
     const password = prompt('Password:');
     const credential = firebase.auth.EmailAuthProvider.credential(
@@ -114,7 +115,6 @@ const changeEmail = (user, credential, newEmail) => {
         console.error(error);
     })
 }
-
 
 const deleteAccount = () => {
     const user = auth.currentUser;
