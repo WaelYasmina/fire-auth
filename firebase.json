@@ -32,6 +32,11 @@
         "destination": "./merge.html",
         "type": 301
       }
+      {
+        "source": "/dashboard",
+        "destination": "./dashboard.html",
+        "type": 301
+      }
     ]
   }
 }
