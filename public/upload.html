@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>User: 이미지 업로드</title>
+    <link rel="stylesheet" href="./upload.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <!-- side menu -->
+    <div class="side_menu">
+      <div class="burger_box">
+        <div class="menu-icon-container">
+          <a href="#" class="menu-icon js-menu_toggle closed">
+            <span class="menu-icon_box">
+              <span class="menu-icon_line menu-icon_line--1"></span>
+              <span class="menu-icon_line menu-icon_line--2"></span>
+              <span class="menu-icon_line menu-icon_line--3"></span>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="container">
+        <h2 class="menu_title">Title: Upload</h2>
+        <ul class="list_load">
+          <li class="list_item"><a href="../dashboard.html">Dashboard</a></li>
+          <li class="list_item">
+            <a href="">Upload Imgs</a>
+          </li>
+          <li class="list_item">
+            <a href="../download/download.html">Download Weights</a>
+          </li>
+          <li class="list_item">
+            <a href="../../streaming/streaming.html">Image Capture</a>
+          </li>
+          <li class="list_item">
+            <a href="../../streaming/streaming.html">Deep Learning</a>
+          </li>
+          <li class="list_item"><a href="#">List Item 06</a></li>
+          <li class="list_item"><a href="#">List Item 07</a></li>
+          <li class="list_item"><a href="#">List Item 08</a></li>
+        </ul>
+        <div class="spacer_box"><p>추가 공간</p></div>
+      </div>
+    </div>
+
+    <!-- body -->
+    <div class="page_title">Upload Imgs</div>
+    <div class="what_to_do">(좌측 메뉴 클릭)</div>
+
+    <h2>일반 사용자용 이미지 업로드 / 가중치파일 다운로드</h2>
+    <button class="addBtn">파일 추가</button>
+    <br />
+    <div class="loader"></div>
+
+    <div class="addForm">
+      <label for="upload-file">업로드할 파일 선택...</label>
+      <input type="file" id="upload-file" multiple="multiple"/>
+      <i class="fas fa-check-circle"></i>
+      <i class="fas fa-times"></i>
+    </div>
+    <table id="fileTable"></table>
+    <!-- body -->
+
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-storage.js"></script>
+
+    <!-- JQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../../../../fire-auth/public/js/upload.js"></script>
+  </body>
+</html>
