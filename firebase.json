@@ -1,11 +1,7 @@
 {
   "hosting": {
     "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "redirects": [
       {
         "source": "/signup",
@@ -31,7 +27,7 @@
         "source": "/merge",
         "destination": "./merge.html",
         "type": 301
-      }
+      },
       {
         "source": "/dashboard",
         "destination": "./dashboard.html",
