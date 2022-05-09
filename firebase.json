@@ -32,6 +32,11 @@
         "source": "/dashboard",
         "destination": "./dashboard.html",
         "type": 301
+      },
+      {
+        "source": "/upload",
+        "destination": "./upload.html",
+        "type": 301
       }
     ]
   }

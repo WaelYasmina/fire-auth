@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>User: 이미지 업로드</title>
-    <link rel="stylesheet" href="./upload.css" />
+    <link rel="stylesheet" href="style/upload.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -69,17 +69,21 @@
     <!-- body -->
 
     <!-- Firebase App is always required and must be first -->
-    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
-    <!-- Add additional services that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-storage.js"></script>
 
+    <script src="/__/firebase/6.2.4/firebase-app.js"></script>
+    <script src="/__/firebase/6.2.4/firebase-auth.js"></script>
+    <script src="/__/firebase/6.2.4/firebase-firestore.js"></script>
+    <script src="/__/firebase/6.2.4/firebase-storage.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#reserved-urls -->
     <!-- JQuery -->
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
-    <script src="../../../../fire-auth/public/js/upload.js"></script>
+
+    <script src="/__/firebase/init.js"></script>
+    <script src="./js/upload.js"></script>
   </body>
 </html>

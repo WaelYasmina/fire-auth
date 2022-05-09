@@ -1,0 +1,181 @@
+body {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+    color: cornflowerblue;
+}
+
+/* -------loader------- */
+
+.loader {
+    margin: 20px auto 0;
+    display: none;
+    border: 10px solid white;
+    border-radius: 50%;
+    border-top: 10px solid cornflowerblue;
+    width: 15px;
+    height: 15px;
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+/* Safari */
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* -------loader------- */
+
+button {
+    background-color: cornflowerblue;
+    border-radius: 30px;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    outline: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.addBtn {
+    padding: 10px 40px;
+}
+
+.addBtn:hover,
+.downloadBtn:hover {
+    background-color: cornflowerblue;
+}
+
+.fa-file-download {
+    margin-right: 10px;
+    font-size: 23px;
+    color: cornflowerblue;
+}
+
+.fa-file-download:hover {
+    color: cornflowerblue;
+    cursor: pointer;
+}
+
+.fa-trash-alt {
+    margin-left: 10px;
+    font-size: 23px;
+    color: lightcoral;
+}
+
+.fa-trash-alt:hover {
+    color: crimson;
+    cursor: pointer;
+}
+
+.deleteBtn {
+    background-color: lightcoral;
+}
+
+.deleteBtn:hover {
+    background-color: crimson;
+}
+
+.addForm {
+    background-color: #f2f2f2;
+    width: 70%;
+    margin: auto;
+    padding: 20px 0;
+    position: relative;
+    margin-top: 20px;
+    display: none;
+}
+
+#upload-file {
+    /* opacity: 0;
+    position: absolute;
+    width: 3%; */
+    display: none;
+    /* visibility: hidden; */
+}
+
+label {
+    cursor: pointer;
+    margin-right: 20px;
+    color: cornflowerblue;
+}
+
+.fa-check-circle {
+    color: cornflowerblue;
+    font-size: 25px;
+    vertical-align: middle;
+}
+
+.fa-check-circle:hover {
+    cursor: pointer;
+    color: cornflowerblue;
+}
+
+.fa-times {
+    color: lightcoral;
+    font-size: 18px;
+    vertical-align: middle;
+    margin-left: 10px;
+    position: absolute;
+    right: 15px;
+    top: 23px;
+}
+
+.fa-times:hover {
+    cursor: pointer;
+    color: crimson;
+}
+
+#fileTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+#fileTable td,
+#fileTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#fileTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#fileTable tr:hover {
+    background-color: #f2f2f2;
+}
+
+#fileTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: cornflowerblue;
+    color: white;
+}
+
+#fileTable tr td a {
+    text-decoration: none;
+}

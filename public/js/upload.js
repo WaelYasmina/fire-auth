@@ -1,24 +1,5 @@
-// update the version number as needed
-src = 'https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js'
-
-// include only the Firebase features as you need
-src = 'https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js'
-src = 'https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js'
-src = 'https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js'
-// Initialize Firebase
-// 정성욱 fb
-var config = {
-  apiKey: 'AIzaSyCh834-1uNnd-9l9Y2nm7n0ErPnljiQAKI',
-  authDomain: 'test-storage-ae139.firebaseapp.com',
-  databaseURL: 'https://test-storage-ae139.firebaseio.com',
-  projectId: 'test-storage-ae139',
-  storageBucket: 'test-storage-ae139.appspot.com',
-  messagingSenderId: '280317155951',
-}
-var defaultApp = firebase.initializeApp(config)
-var firestore = defaultApp.firestore()
-var storage = defaultApp.storage()
-var auth = defaultApp.auth
+var firestore = firebase.firestore()
+var storage = firebase.storage()
 
 // DOM element
 const addFileBtn = document.querySelector('.addBtn')
@@ -30,10 +11,11 @@ const checkBtn = document.querySelector('.fa-check-circle')
 const fileTable = document.querySelector('#fileTable')
 const loader = document.querySelector('.loader')
 
+const auth = firebase.auth();
 // var global
 let fileBrowse = null
 let urlDownload = null
-
+let userUid = null
 // sidebar
 // Requires jQuery
 $(document).on('click', '.js-menu_toggle.closed', function (e) {
@@ -100,6 +82,7 @@ inputInit = function () {
 
 // function add header table static
 showHeaderTable = function () {
+
   html = `
     <tr>
         <th>No</th>
@@ -108,6 +91,7 @@ showHeaderTable = function () {
     </tr>
     `
   fileTable.insertAdjacentHTML('beforeend', html)
+
 }
 
 // function show list of files
@@ -133,7 +117,11 @@ showListData = function (no, fileName, fileLoc) {
 }
 
 // init system
+auth.onAuthStateChanged((user) => {
+  userUid = user.uid
+});
 getAllFiles()
+
 
 // handle add file btn
 addFileBtn.addEventListener('click', () => {
@@ -165,9 +153,9 @@ checkBtn.addEventListener('click', () => {
     loader.style.display = 'block'
     closeAddFormBtn.style.display = 'none'
     checkBtn.style.visibility = 'hidden'
-    let storageRef = storage.ref('images/' + fileBrowse.name) //스토리지
+    let storageRef = storage.ref('images/' + userUid +'/' + fileBrowse.name) //스토리지 firebase.auth().currentUser.uid
     storageRef.put(fileBrowse).then(() => {
-      let fileLink = storage.ref(`images/${fileBrowse.name}`)
+      let fileLink = storage.ref(`images/${userUid}/${fileBrowse.name}`)
       urlDownload = fileLink
         .getDownloadURL()
         .then((url) => {
@@ -183,6 +171,7 @@ checkBtn.addEventListener('click', () => {
               docRef.add({
                 fileName: fileBrowse.name, //파일 이름
                 fileLocation: urlDownload, //파이어베이스 다운로드 URL
+                uploader: userUid,   //파일 올린 사람
               })
               loader.style.display = 'none'
               closeAddFormBtn.style.display = 'block'
