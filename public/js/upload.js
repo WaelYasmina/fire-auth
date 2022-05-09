@@ -16,6 +16,7 @@ const auth = firebase.auth();
 let fileBrowse = null
 let urlDownload = null
 let userUid = null
+let userEmail = null
 // sidebar
 // Requires jQuery
 $(document).on('click', '.js-menu_toggle.closed', function (e) {
@@ -119,6 +120,7 @@ showListData = function (no, fileName, fileLoc) {
 // init system
 auth.onAuthStateChanged((user) => {
   userUid = user.uid
+  userEmail = user.email
 });
 getAllFiles()
 
@@ -171,7 +173,7 @@ checkBtn.addEventListener('click', () => {
               docRef.add({
                 fileName: fileBrowse.name, //파일 이름
                 fileLocation: urlDownload, //파이어베이스 다운로드 URL
-                uploader: userUid,   //파일 올린 사람
+                uploader: userEmail,   //파일 올린 사람
               })
               loader.style.display = 'none'
               closeAddFormBtn.style.display = 'block'
